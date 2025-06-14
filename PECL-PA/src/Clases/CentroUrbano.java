@@ -16,18 +16,22 @@ public class CentroUrbano {
     private List<Aldeanos> casaPrincipal = Collections.synchronizedList(new ArrayList<>());
     private List<Aldeanos> areaRecuperacion = Collections.synchronizedList(new ArrayList<>());
     private List<Aldeanos> cuartel = Collections.synchronizedList(new ArrayList<>());
+    private Almacenes A1, A2, A3;
     //Lock
     private Lock despensa = new ReentrantLock();
     private Condition hayComida = despensa.newCondition();
     //Registro
     private Registro log;
     //Interfaz
-    private Controlador controlRefugio;
+    private Controlador centroUrbano;
 
-    public CentroUrbano(Registro r, Controlador cR){
+    public CentroUrbano(Registro r, Controlador cR, Almacenes A1, Almacenes A2, Almacenes A3){
         this.log = r;
         this.Comida = 0;
-        this.controlRefugio = cR;
+        this.centroUrbano = cR;
+        this.A1 = A1;
+        this.A2 = A2;
+        this.A3 = A3;
     }
     
     //Hacer el cuartel en el futuro
@@ -65,22 +69,7 @@ public class CentroUrbano {
             despensa.unlock();
         }
     }
-    public void dejarComida(Aldeanos humano){
-        despensa.lock();
-        entrar(plazaCentral, humano, "ZonaComedero");
-        log.evento(humano.getID() + " ha entrado en el comedor.");
-        try {
-            //Accede a la variable compartida para dejar comida
-            Comida += 2;
-            //Registramos el deposito de comida
-            log.evento((humano.getID() + " ha dejado comida en la despensa, ahora hay " + getComida()));
-            hayComida.signalAll();
-        } finally {
-            salir(plazaCentral, humano, "ZonaComedero");
-            log.evento(humano.getID() + " ha salido del comedor.");
-            despensa.unlock();
-        }
-    }
+    
     
     //Acciones de espera en el refugio
     public void esperaComun(Aldeanos aldeano){
@@ -92,23 +81,33 @@ public class CentroUrbano {
         log.evento(aldeano.getID() + " ha salido de la Casa Principal.");
     }
     public void planificarTrabajo(Aldeanos aldeano){
-        entrar(areaRecuperacion, aldeano, "PlazaCentral");
+        entrar(plazaCentral, aldeano, "PlazaCentral");
         log.evento(aldeano.getID() + " ha entrado en la Plaza Central.");
         //Espera en la zona de descanso entre 2 y 4s (4-2=2)
         tiempoEspera(aldeano, "planificar", 1000, 2001);
-        salir(areaRecuperacion, aldeano, "PlazaCentral");
         int recurso = (int) (Math.random()* 3) + 1;
+        salir(plazaCentral, aldeano, "PlazaCentral");
+        switch(recurso){
+            case 1: 
+                aldeano.setGranero(true);
+                
+            case 2:
+                aldeano.setAserradero(true);
+                
+            case 3:
+                aldeano.setTesoreria(true);
+        }
         //Hacer que elija la zona de recursos a la que irá
         log.evento(aldeano.getID() + " ha salido de la Plaza Central.");
     }
-    public void curarseMedico(Aldeanos humano){
-        entrar(areaRecuperacion, humano, "ZonaDescanso");
-        log.evento(humano.getID() + " ha entrado en la zona de descanso.");
+    public void areaRecuperacion(Aldeanos aldeano){
+        entrar(areaRecuperacion, aldeano, "AreaRecuperacion");
+        log.evento(aldeano.getID() + " ha entrado al area de recuperación.");
         //Descansa y pone el bit herida a 0 despues de entre 3 y 5s (5-3=2)
-        tiempoEspera(humano, "curarse", 3000, 2001);
-        humano.setHerido(false); //Se cura
-        salir(areaRecuperacion, humano, "ZonaDescanso");
-        log.evento(humano.getID() + " ha salido de la zona de descanso.");
+        tiempoEspera(aldeano, "curarse", 12000, 3001);
+        aldeano.setHerido(false); //Se cura
+        salir(areaRecuperacion, aldeano, "ZonaDescanso");
+        log.evento(aldeano.getID() + " ha salido de la zona de descanso.");
     }
     
     //Metodo en comun a las actividades de espera, toma 4 valores:
@@ -130,11 +129,11 @@ public class CentroUrbano {
     //Añadir y quitar de listas (entrada y salida de las zonas)
     private void entrar(List<Aldeanos> L, Aldeanos humano, String zona){
         L.add(humano);
-        controlRefugio.add(zona, humano.getID());
+        centroUrbano.add(zona, humano.getID());
     }
     private void salir(List<Aldeanos> L, Aldeanos humano, String zona){
         L.remove(humano);
-        controlRefugio.remove(zona, humano.getID());
+        centroUrbano.remove(zona, humano.getID());
     }
     
     //Gets y sets

@@ -24,7 +24,6 @@ public class SimulacionDatos {
         Z1 = gestor.getZonaExterior1();
         Z2 = gestor.getZonaExterior2();
         Z3 = gestor.getZonaExterior3();
-        Z4 = gestor.getZonaExterior4();
     }
 
     public int getCantidadHumanosEnRefugio() {

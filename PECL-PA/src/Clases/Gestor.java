@@ -12,7 +12,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Gestor {
-    private final Tuneles T1, T2, T3, T4;
     private final CyclicBarrier barrera1, barrera2, barrera3, barrera4;
     private final AreaRecursos granja, bosque, mina;
     private List<Aldeanos> listaPuerta1 = Collections.synchronizedList(new ArrayList<>());
@@ -20,26 +19,23 @@ public class Gestor {
     private List<Aldeanos> listaPuerta3 = Collections.synchronizedList(new ArrayList<>());
     private final Registro log;
     private final CentroUrbano Ref;
+    private Almacenes granero, aserradero, tesoreria;
     ExecutorService ejecutor = Executors.newCachedThreadPool();
     
-    private Controlador controlTuneles;
+    private Controlador control;
     
     public Gestor(Registro log, ExecutorService ejecutor, 
             Controlador controlTuneles, Controlador controlRefugio, Controlador controlExterior){
         this.log = log;
         this.ejecutor = ejecutor;
-        this.controlTuneles = controlTuneles;
+        this.control = controlTuneles;
+        this.granero = new Almacenes(1, log, control, "granero");
         //Inicialización del refugio
-        this.Ref = new CentroUrbano(log, controlRefugio);
-        //los tuneles
-        this.T1 = new Tuneles(1, log, controlTuneles);
-        this.T2 = new Tuneles(2, log, controlTuneles);
-        this.T3 = new Tuneles(3, log, controlTuneles);
-        this.T4 = new Tuneles(4, log, controlTuneles);
+        this.Ref = new CentroUrbano(log, control, granero, aserradero, tesoreria);
         //las zonas exteriores
-        this.granja = new AreaRecursos(log, ejecutor, 1, T1, controlExterior);
-        this.bosque = new AreaRecursos(log, ejecutor, 2, T2, controlExterior);
-        this.mina = new AreaRecursos(log, ejecutor, 3, T3, controlExterior);
+        this.granja = new AreaRecursos(log, ejecutor, 1, controlExterior);
+        this.bosque = new AreaRecursos(log, ejecutor, 2, controlExterior);
+        this.mina = new AreaRecursos(log, ejecutor, 3, controlExterior);
         //y las barreras
         barrera1 = new CyclicBarrier(3);
         barrera2 = new CyclicBarrier(3);
@@ -50,7 +46,7 @@ public class Gestor {
     //Método para crear los humanos
     public void generadorHumanos(){
         for(int i = 1; i < 10000; i++){
-            Aldeanos humano = new Aldeanos(i, this, Ref);
+            Aldeanos humano = new Aldeanos(i, this, Ref, granero, aserradero, tesoreria);
             ejecutor.execute(humano);
             //Espera un tiempo aleatorio antes de generar el siguiente humano
             int num = (int)(Math.random() * (2000 - 500 + 1)) + 500;
@@ -69,9 +65,9 @@ public class Gestor {
             //Se escoge un tunel aleatorio y entra por la puerta que corresponde al tunel que corresponde
             int tunel = (int)(Math.random() * 3) + 1;           
             switch(tunel){
-                case 1 -> procesoAreaRecursos(aldeano, barrera1, "Puerta1", listaPuerta1, T1, granja);
-                case 2 -> procesoAreaRecursos(aldeano, barrera2, "Puerta2", listaPuerta2, T2, bosque);
-                case 3 -> procesoAreaRecursos(aldeano, barrera3, "Puerta3", listaPuerta3, T3, mina);
+                case 1 -> procesoAreaRecursos(aldeano, barrera1, "Puerta1", listaPuerta1, granja);
+                case 2 -> procesoAreaRecursos(aldeano, barrera2, "Puerta2", listaPuerta2, bosque);
+                case 3 -> procesoAreaRecursos(aldeano, barrera3, "Puerta3", listaPuerta3, mina);
             }
         } catch (InterruptedException | BrokenBarrierException e) {
             System.out.println("Ha saltado una interrupcion en la zona de puertas");}
@@ -79,31 +75,20 @@ public class Gestor {
     
     //Metodo que cumple las funciones para acceder y salir del tunel
     private void procesoAreaRecursos(Aldeanos aldeano, CyclicBarrier B, String puertaID, 
-            List<Aldeanos> L, Tuneles T, AreaRecursos Z) throws InterruptedException, BrokenBarrierException {
+            List<Aldeanos> L, AreaRecursos Z) throws InterruptedException, BrokenBarrierException {
         //Regeneramos las barreras si es necesario
         if(B.isBroken()) {B.reset();}
         //Espera en la barrera a formar grupo
-        log.evento((aldeano.getID() + " espera en la puerta " + T.getID()));
+        log.evento((aldeano.getID() + " espera en la puerta "));
         esperaPuerta(aldeano, L, puertaID);
         B.await();
         salirPuerta(aldeano, L, puertaID);
         //Atraviesa el tunel una vez se han reunido 3 personas
-        log.evento((aldeano.getID() + " pasa en grupo por la puerta " + T.getID()));
-        T.entrar(aldeano);
+        log.evento((aldeano.getID() + " pasa en grupo por la puerta "));
         //Sale al exterior
         Z.entrarZonaRecursos(aldeano);
     }
     
-    //Metodo llamado para volver desde el exterior al tunel
-    public void regresarTunel(Aldeanos humano, AreaRecursos zona){
-        zona.saleZonaRecursos(humano);
-        switch(zona.getZona()){
-            case 1 -> T1.salir(humano);
-            case 2 -> T2.salir(humano);
-            case 3 -> T3.salir(humano);
-            case 4 -> T4.salir(humano);
-        }
-    }
     
     //Metodo que mueve el zombi a una zona aleatoria
     public void Deambular(Barbaros zombi){
@@ -123,11 +108,11 @@ public class Gestor {
     //Metodos de las listas de las barreras/puertas y su paso a interfaz
     private void esperaPuerta(Aldeanos humano, List<Aldeanos> L, String puertaID){
         L.add(humano);
-        controlTuneles.add(puertaID, humano.getID());
+        control.add(puertaID, humano.getID());
     }
     private void salirPuerta(Aldeanos humano, List<Aldeanos> L, String puertaID){
         L.remove(humano);
-        controlTuneles.remove(puertaID, humano.getID());
+        control.remove(puertaID, humano.getID());
     }
     
     public CentroUrbano getRefugio(){
@@ -141,17 +126,5 @@ public class Gestor {
     }
     public AreaRecursos getZonaExterior3(){
         return mina;
-    }
-    public Tuneles getTunel1(){
-        return T1;
-    }
-    public Tuneles getTunel2(){
-        return T2;
-    }
-    public Tuneles getTunel3(){
-        return T3;
-    }
-    public Tuneles getTunel4(){
-        return T4;
     }
 }

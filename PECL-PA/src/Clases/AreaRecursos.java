@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 public class AreaRecursos {
     
     private final int zona; //Numero asignado a cada zona
-    private final Tuneles tunel; //Tunel conectado a la zona
     
     private List<Aldeanos> listaAldeanos = Collections.synchronizedList(new ArrayList<>());
     private List<Barbaros> listaBarbaros = Collections.synchronizedList(new ArrayList<>());
@@ -28,32 +27,34 @@ public class AreaRecursos {
     ExecutorService ejecutor = Executors.newCachedThreadPool();
     private Controlador controlExterior;
     
-    AreaRecursos(Registro log, ExecutorService ej, int zona, Tuneles tunel, Controlador controlador){
+    AreaRecursos(Registro log, ExecutorService ej, int zona, Controlador controlador){
         this.log = log;
         this.ejecutor = ej;
         this.zona = zona;
-        this.tunel = tunel;
         this.controlExterior = controlador;
     }
     
-    //Método para salir del tunel y explorar el exterior, para al final volver
-    public void explorar(Aldeanos humano){
-        listaAldeanos.add(humano);
+    //Método para salir del tunel y recolectarRecurso el exterior, para al final volver
+    public void recolectarRecurso(Aldeanos aldeano){
+        listaAldeanos.add(aldeano);
         //Registramos el evento de exploracion
-        log.evento((humano.getID() + " explora la zona exterior: " + zona));
-        int t = (int)(Math.random() * (2001)) + 3000; //Calculamos el tiempo que dura
+        log.evento((aldeano.getID() + " recolecta recurso de la zona: " + zona));
+        int t = (int)(Math.random() * (5001)) + 5000; //Calculamos el tiempo que dura
         try {
-            //Durante este tiempo el humano busca comida pero es susceptible a ataques zombi
+            //Durante este tiempo el aldeano busca comida pero es susceptible a ataques zombi
             Thread.sleep(t);
+            int recurso = (int)(Math.random() * (11)) + 10;
+            aldeano.agregarRecurso(recurso);
             //Si termina la busqueda encuentra comida
         } catch (InterruptedException e) {
-            //Si es interrumpido es por un ataque zombi
+            //Si es interrumpido es por un ataque barbaro
             bajoAtaque.lock();
             try { 
                 finAtaque.await();
                 //Tiempo que tardara el ataque
                 int t2 = (int)(Math.random() * (1500 - 500 + 1)) + 500;
                 Thread.sleep(t2);
+                aldeano.quitarRecursos();
             } catch(InterruptedException e2){
                 System.out.println("Interrupcion en la espera del humano tras el ataque");
             } finally {
@@ -70,7 +71,7 @@ public class AreaRecursos {
         Aldeanos humanoAtacado = getHumanoAleatorio();
         log.evento(zombi.getID() + " va a atacar a: " + humanoAtacado.getID());
         try {
-            //Se interrumpe primero para que el humano deje de explorar
+            //Se interrumpe primero para que el humano deje de recolectarRecurso
             humanoAtacado.interrupt();
             //Determina el resultado del ataque
             int prob = (int)(Math.random() * 3) + 1; //Variable aleatoria para determinar si mata o hiere
