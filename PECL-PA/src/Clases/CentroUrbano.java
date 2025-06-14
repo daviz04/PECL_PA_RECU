@@ -105,7 +105,7 @@ public class CentroUrbano {
         log.evento(aldeano.getID() + " ha entrado al area de recuperación.");
         //Descansa y pone el bit herida a 0 despues de entre 3 y 5s (5-3=2)
         tiempoEspera(aldeano, "curarse", 12000, 3001);
-        aldeano.setHerido(false); //Se cura
+        aldeano.setBajoAtaque(false); //Se cura
         salir(areaRecuperacion, aldeano, "ZonaDescanso");
         log.evento(aldeano.getID() + " ha salido de la zona de descanso.");
     }

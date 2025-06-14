@@ -20,19 +20,25 @@ public class Gestor {
     private final Registro log;
     private final CentroUrbano Ref;
     private Almacenes granero, aserradero, tesoreria;
+    private CampamentoBarbaro campBarbaro;
     ExecutorService ejecutor = Executors.newCachedThreadPool();
     
     private Controlador control;
     
     public Gestor(Registro log, ExecutorService ejecutor, 
-            Controlador controlTuneles, Controlador controlRefugio, Controlador controlExterior){
+            Controlador controlTuneles, Controlador controlRefugio, Controlador controlExterior, CampamentoBarbaro campBarbaro){
         this.log = log;
         this.ejecutor = ejecutor;
         this.control = controlTuneles;
+        //Almacenes
         this.granero = new Almacenes(1, log, control, "granero");
+        this.aserradero = new Almacenes(1, log, control, "aserradero");
+        this.tesoreria = new Almacenes(1, log, control, "tesoreria");
+        //Campamento barbaro
+        this.campBarbaro = campBarbaro;
         //Inicialización del refugio
         this.Ref = new CentroUrbano(log, control, granero, aserradero, tesoreria);
-        //las zonas exteriores
+        //las areas de recursos
         this.granja = new AreaRecursos(log, ejecutor, 1, controlExterior);
         this.bosque = new AreaRecursos(log, ejecutor, 2, controlExterior);
         this.mina = new AreaRecursos(log, ejecutor, 3, controlExterior);
@@ -43,7 +49,7 @@ public class Gestor {
         barrera4 = new CyclicBarrier(3);
     }
     
-    //Método para crear los humanos
+    //Método para crear los aldeanos
     public void generadorHumanos(){
         for(int i = 1; i < 10000; i++){
             Aldeanos humano = new Aldeanos(i, this, Ref, granero, aserradero, tesoreria);
@@ -54,7 +60,22 @@ public class Gestor {
                 //Congelar el hilo principal
                 Thread.sleep(num);
             } catch (InterruptedException e) {
-                System.out.println("Espera al siguiente humano interrumpida");
+                System.out.println("Espera al siguiente aldeano interrumpido");
+            }
+        }
+    }
+    //Método para crear a los barbaros
+    public void generadorBarbaros(){
+        for(int i = 1; i < 999; i++){
+            Barbaros barbaro = new Barbaros(i, this);
+            ejecutor.execute(barbaro);
+            //Espera un tiempo aleatorio antes de generar el siguiente humano
+             int num = 15000 + (int)(Math.random() * 15001);
+            try {
+                //Congelar el hilo principal
+                Thread.sleep(num);
+            } catch (InterruptedException e) {
+                System.out.println("Espera al siguiente barbaro interrumpido");
             }
         }
     }

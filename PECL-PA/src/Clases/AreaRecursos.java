@@ -64,12 +64,12 @@ public class AreaRecursos {
     }
     
     //Los ataques deben tener en cuenta la variable compartida lista de humanos
-    public void ataqueZombi(Barbaros zombi) {
+    public void ataqueBarbaro(Barbaros barbaro) {
         //Bloqueamos por el ataque
         bajoAtaque.lock();
-        //Variable para determinar a que humano atacara el zombi
+        //Variable para determinar a que humano atacara el barbaro
         Aldeanos humanoAtacado = getHumanoAleatorio();
-        log.evento(zombi.getID() + " va a atacar a: " + humanoAtacado.getID());
+        log.evento(barbaro.getID() + " va a atacar a: " + humanoAtacado.getID());
         try {
             //Se interrumpe primero para que el humano deje de recolectarRecurso
             humanoAtacado.interrupt();
@@ -80,27 +80,21 @@ public class AreaRecursos {
                 humanoAtacado.setMuerto();
                 quitarHumanoLista(humanoAtacado); //Eliminacion de la lista de humanos
                 
-                //Registramos la muerte del humano por el ataque zombi
-                log.evento((zombi.getID() + " ha matado a: " + humanoAtacado.getID()));
+                //Registramos la muerte del humano por el ataque barbaro
+                log.evento((barbaro.getID() + " ha matado a: " + humanoAtacado.getID()));
                 
-                zombi.aumentarMuertes(); //Suma uno al numero de muertes del zombi                               
-                Barbaros zombieConvertido = zombi.conversionZombie(humanoAtacado); //Zombie del humano matado
-                //Añadimos el zombi a la lista de la zona
-                addZombi(zombieConvertido);
-                //Informamos del nuevo zombi
-                log.evento((zombieConvertido.getID() + " a aparecido en la zona " + getZona()));
-                //Ejecutamos el nuevo zombi en el pool
-                ejecutor.execute(zombieConvertido);                      
+                barbaro.aumentarMuertes(); //Suma uno al numero de muertes del barbaro                               
+                           
             } else { //Hiere al humano
-                humanoAtacado.setHerido(true);
-                //Registramos la herida del humano por el zombi
-                log.evento((humanoAtacado.getID() + " ha sido herido por: " + zombi.getID()));
+                humanoAtacado.setBajoAtaque(true);
+                //Registramos la herida del humano por el barbaro
+                log.evento((humanoAtacado.getID() + " ha sido herido por: " + barbaro.getID()));
             }
             finAtaque.signalAll();
         } finally { 
             //Termina el ataque
             bajoAtaque.unlock();
-            try { //El zombi espera el tiempo del ataque
+            try { //El barbaro espera el tiempo del ataque
                 int t = (int)(Math.random() * (1500 - 500 + 1)) + 500; 
                 Thread.sleep(t);
             } catch (InterruptedException e){

@@ -8,8 +8,7 @@ public class Aldeanos extends Thread {
     private int nid; //numero del id
     private String id;
     private int recurso = 0;
-    private boolean herido;
-    private boolean muerto = false;
+    private boolean bajoAtaque;
     private boolean granero = false;
     private boolean aserradero = false;
     private boolean tesoreria = false;
@@ -20,7 +19,7 @@ public class Aldeanos extends Thread {
     private AreaRecursos actual;
     
     public Aldeanos(int id, Gestor tuneles, CentroUrbano R, Almacenes A1, Almacenes A2, Almacenes A3){
-        herido = false;
+        bajoAtaque = false;
         this.nid = id;
         this.id = String.format("A%04d", id);
         this.gestor = tuneles;
@@ -29,11 +28,7 @@ public class Aldeanos extends Thread {
         this.A2 = A2;
         this.A3 = A3;
     }
-    
-    //Metodo que se activa cuando el humano muere por ataque de zombi
-    public void morir() {
-        muerto = true;
-    }
+   
     
     //Gets y sets
     public String getID(){
@@ -43,16 +38,13 @@ public class Aldeanos extends Thread {
         return nid;
     }
     public boolean getHerido(){
-        return herido;
+        return bajoAtaque;
     }
-    public void setHerido(boolean herido){
-        this.herido = herido;
+    public void setBajoAtaque(boolean bajoAtaque){
+        this.bajoAtaque = bajoAtaque;
     }
     public void setActual(AreaRecursos zona){
         this.actual = zona;
-    }
-    public void setMuerto(){
-        this.muerto = true;
     }
     public int getRecurso(){
         return recurso;
@@ -82,55 +74,47 @@ public class Aldeanos extends Thread {
         
     //Ejecucion del hilo
     public void run(){
-        while(!muerto){
-            //Accede a la zona comun
-            centroUrbano.esperaComun(this);
+        centroUrbano.esperaComun(this);
+        while(true){
             centroUrbano.planificarTrabajo(this);
             //Selecciona un tunel y lo atraviesa en grupo de 3
             gestor.accederAreaRecursos(this);
             //Explora el exterior
             actual.recolectarRecurso(this);
-            if (!muerto){ //Comprueba si regresa vivo
-                //Si ha sobrevivido regresa por su tunel
-                setActual(null); //Deja de estar en el exterior
-                //Si el hilo vuelve herido no habra conseguido comida
-                if(!this.herido){
-                    if(granero){
-                        try {
-                            A1.almacenar(this, "almacena grano");
-                            limpiarAlmacen();
-                        } catch (InterruptedException ex) {
+            setActual(null); //Deja de estar en el exterior
+            //Si el hilo vuelve bajoAtaque no habra conseguido comida
+            if(!this.bajoAtaque){
+                if(granero){
+                    try {
+                        A1.almacenar(this, "almacena grano");
+                        limpiarAlmacen();
+                    } catch (InterruptedException ex) {
                             Logger.getLogger(Aldeanos.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }else if(aserradero){
-                        try {
-                            A2.almacenar(this, "almacena madera");
-                            limpiarAlmacen();
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(Aldeanos.class.getName()).log(Level.SEVERE, null, ex);
-                        }          
-                    }else if(tesoreria){
-                         try {
-                            A3.almacenar(this, "almacena oro");
-                            limpiarAlmacen();
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(Aldeanos.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }  
-                }
-                //Va a descansar
-                centroUrbano.planificarTrabajo(this);
-                //Despues va a comer
-                centroUrbano.comerComedor(this);
-                //Si esta herido se cura
-                if(this.herido){
+                    }
+                }else if(aserradero){
+                    try {
+                        A2.almacenar(this, "almacena madera");
+                        limpiarAlmacen();
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Aldeanos.class.getName()).log(Level.SEVERE, null, ex);
+                    }          
+                }else if(tesoreria){
+                    try {
+                        A3.almacenar(this, "almacena oro");
+                        limpiarAlmacen();
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Aldeanos.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }  
+            }
+               
+                if(this.bajoAtaque){
                     centroUrbano.areaRecuperacion(this);
                 }
                 //Repite el ciclo despues de 1,5-2s   
                 int t =(int)(Math.random() * (1501)) + 500;
                 try {sleep(t);} catch (InterruptedException e) {
                     System.out.println("Error del humano antes de repetir su ciclo");
-                }
             }
         }
     }   
