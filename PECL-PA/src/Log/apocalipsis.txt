@@ -1,0 +1,370 @@
+----- HISTORIAL APOCALIPTICO -----
+2025-05-05 23:04:42 -> Z0000 se mueve a la zona: 1
+2025-05-05 23:04:42 -> H0001 ha entrado en la zona comun.
+2025-05-05 23:04:42 -> H0001 empieza a esperar en la zona comun
+2025-05-05 23:04:43 -> H0002 ha entrado en la zona comun.
+2025-05-05 23:04:43 -> H0002 empieza a esperar en la zona comun
+2025-05-05 23:04:44 -> H0001 ha terminado de esperar en la zona comun
+2025-05-05 23:04:44 -> H0001 ha salido de la zona comun.
+2025-05-05 23:04:44 -> H0001 espera en la puerta 4
+2025-05-05 23:04:44 -> H0003 ha entrado en la zona comun.
+2025-05-05 23:04:44 -> H0003 empieza a esperar en la zona comun
+2025-05-05 23:04:45 -> H0002 ha terminado de esperar en la zona comun
+2025-05-05 23:04:45 -> H0002 ha salido de la zona comun.
+2025-05-05 23:04:45 -> H0002 espera en la puerta 1
+2025-05-05 23:04:45 -> Z0000 se mueve a la zona: 4
+2025-05-05 23:04:45 -> H0004 ha entrado en la zona comun.
+2025-05-05 23:04:45 -> H0004 empieza a esperar en la zona comun
+2025-05-05 23:04:46 -> H0005 ha entrado en la zona comun.
+2025-05-05 23:04:46 -> H0005 empieza a esperar en la zona comun
+2025-05-05 23:04:46 -> H0003 ha terminado de esperar en la zona comun
+2025-05-05 23:04:46 -> H0003 ha salido de la zona comun.
+2025-05-05 23:04:46 -> H0003 espera en la puerta 1
+2025-05-05 23:04:47 -> H0004 ha terminado de esperar en la zona comun
+2025-05-05 23:04:47 -> H0004 ha salido de la zona comun.
+2025-05-05 23:04:47 -> H0004 espera en la puerta 3
+2025-05-05 23:04:48 -> H0006 ha entrado en la zona comun.
+2025-05-05 23:04:48 -> H0006 empieza a esperar en la zona comun
+2025-05-05 23:04:48 -> H0005 ha terminado de esperar en la zona comun
+2025-05-05 23:04:48 -> H0005 ha salido de la zona comun.
+2025-05-05 23:04:48 -> H0005 espera en la puerta 3
+2025-05-05 23:04:48 -> Z0000 se mueve a la zona: 4
+2025-05-05 23:04:49 -> H0007 ha entrado en la zona comun.
+2025-05-05 23:04:49 -> H0007 empieza a esperar en la zona comun
+2025-05-05 23:04:49 -> H0006 ha terminado de esperar en la zona comun
+2025-05-05 23:04:49 -> H0006 ha salido de la zona comun.
+2025-05-05 23:04:49 -> H0006 espera en la puerta 3
+2025-05-05 23:04:49 -> H0004 pasa en grupo por la puerta 3
+2025-05-05 23:04:49 -> H0005 pasa en grupo por la puerta 3
+2025-05-05 23:04:49 -> H0006 pasa en grupo por la puerta 3
+2025-05-05 23:04:49 -> H0004 entra por el tunel: 3
+2025-05-05 23:04:50 -> Z0000 se mueve a la zona: 3
+2025-05-05 23:04:50 -> H0007 ha terminado de esperar en la zona comun
+2025-05-05 23:04:50 -> H0007 ha salido de la zona comun.
+2025-05-05 23:04:50 -> H0007 espera en la puerta 3
+2025-05-05 23:04:50 -> H0004 ha terminado de recorrer el tunel: 3
+2025-05-05 23:04:50 -> H0005 entra por el tunel: 3
+2025-05-05 23:04:50 -> H0004 ha entrado a la zona exterior: 3
+2025-05-05 23:04:50 -> H0004 explora la zona exterior: 3
+2025-05-05 23:04:51 -> H0008 ha entrado en la zona comun.
+2025-05-05 23:04:51 -> H0008 empieza a esperar en la zona comun
+2025-05-05 23:04:51 -> H0005 ha terminado de recorrer el tunel: 3
+2025-05-05 23:04:51 -> H0005 ha entrado a la zona exterior: 3
+2025-05-05 23:04:51 -> H0006 entra por el tunel: 3
+2025-05-05 23:04:51 -> H0005 explora la zona exterior: 3
+2025-05-05 23:04:52 -> H0008 ha terminado de esperar en la zona comun
+2025-05-05 23:04:52 -> H0008 ha salido de la zona comun.
+2025-05-05 23:04:52 -> H0008 espera en la puerta 4
+2025-05-05 23:04:52 -> H0009 ha entrado en la zona comun.
+2025-05-05 23:04:52 -> H0009 empieza a esperar en la zona comun
+2025-05-05 23:04:52 -> H0006 ha terminado de recorrer el tunel: 3
+2025-05-05 23:04:53 -> H0006 ha entrado a la zona exterior: 3
+2025-05-05 23:04:53 -> H0006 explora la zona exterior: 3
+2025-05-05 23:04:53 -> Z0000 se mueve a la zona: 1
+2025-05-05 23:04:53 -> H0009 ha terminado de esperar en la zona comun
+2025-05-05 23:04:53 -> H0009 ha salido de la zona comun.
+2025-05-05 23:04:53 -> H0009 espera en la puerta 3
+2025-05-05 23:04:53 -> H0010 ha entrado en la zona comun.
+2025-05-05 23:04:53 -> H0010 empieza a esperar en la zona comun
+2025-05-05 23:04:54 -> H0004 regresa de la zona exterior: 3
+2025-05-05 23:04:54 -> H0004 sale por el tunel: 3
+2025-05-05 23:04:55 -> H0004 ha terminado de recorrer el tunel: 3
+2025-05-05 23:04:55 -> H0004 ha entrado en el comedor.
+2025-05-05 23:04:55 -> H0004 ha dejado comida en la despensa, ahora hay 2
+2025-05-05 23:04:55 -> H0004 ha salido del comedor.
+2025-05-05 23:04:55 -> H0004 ha entrado en la zona de descanso.
+2025-05-05 23:04:55 -> H0004 empieza a descansar
+2025-05-05 23:04:55 -> H0011 ha entrado en la zona comun.
+2025-05-05 23:04:55 -> H0011 empieza a esperar en la zona comun
+2025-05-05 23:04:55 -> H0010 ha terminado de esperar en la zona comun
+2025-05-05 23:04:55 -> H0010 ha salido de la zona comun.
+2025-05-05 23:04:55 -> H0010 espera en la puerta 4
+2025-05-05 23:04:55 -> H0010 pasa en grupo por la puerta 4
+2025-05-05 23:04:55 -> H0008 pasa en grupo por la puerta 4
+2025-05-05 23:04:55 -> H0001 pasa en grupo por la puerta 4
+2025-05-05 23:04:55 -> H0010 entra por el tunel: 4
+2025-05-05 23:04:55 -> Z0000 se mueve a la zona: 4
+2025-05-05 23:04:55 -> H0012 ha entrado en la zona comun.
+2025-05-05 23:04:55 -> H0012 empieza a esperar en la zona comun
+2025-05-05 23:04:56 -> H0010 ha terminado de recorrer el tunel: 4
+2025-05-05 23:04:56 -> H0010 ha entrado a la zona exterior: 4
+2025-05-05 23:04:56 -> H0008 entra por el tunel: 4
+2025-05-05 23:04:56 -> H0010 explora la zona exterior: 4
+2025-05-05 23:04:56 -> H0005 regresa de la zona exterior: 3
+2025-05-05 23:04:56 -> H0005 sale por el tunel: 3
+2025-05-05 23:04:56 -> H0011 ha terminado de esperar en la zona comun
+2025-05-05 23:04:57 -> H0011 ha salido de la zona comun.
+2025-05-05 23:04:57 -> H0011 espera en la puerta 1
+2025-05-05 23:04:57 -> H0011 pasa en grupo por la puerta 1
+2025-05-05 23:04:57 -> H0003 pasa en grupo por la puerta 1
+2025-05-05 23:04:57 -> H0002 pasa en grupo por la puerta 1
+2025-05-05 23:04:57 -> H0011 entra por el tunel: 1
+2025-05-05 23:04:57 -> H0006 regresa de la zona exterior: 3
+2025-05-05 23:04:57 -> H0008 ha terminado de recorrer el tunel: 4
+2025-05-05 23:04:57 -> H0008 ha entrado a la zona exterior: 4
+2025-05-05 23:04:57 -> H0001 entra por el tunel: 4
+2025-05-05 23:04:57 -> H0008 explora la zona exterior: 4
+2025-05-05 23:04:57 -> H0012 ha terminado de esperar en la zona comun
+2025-05-05 23:04:57 -> H0012 ha salido de la zona comun.
+2025-05-05 23:04:57 -> H0012 espera en la puerta 1
+2025-05-05 23:04:57 -> H0013 ha entrado en la zona comun.
+2025-05-05 23:04:57 -> H0013 empieza a esperar en la zona comun
+2025-05-05 23:04:57 -> Z0000 se mueve a la zona: 1
+2025-05-05 23:04:57 -> H0005 ha terminado de recorrer el tunel: 3
+2025-05-05 23:04:57 -> H0005 ha entrado en el comedor.
+2025-05-05 23:04:57 -> H0006 sale por el tunel: 3
+2025-05-05 23:04:57 -> H0005 ha dejado comida en la despensa, ahora hay 4
+2025-05-05 23:04:57 -> H0005 ha salido del comedor.
+2025-05-05 23:04:57 -> H0005 ha entrado en la zona de descanso.
+2025-05-05 23:04:57 -> H0005 empieza a descansar
+2025-05-05 23:04:58 -> H0011 ha terminado de recorrer el tunel: 1
+2025-05-05 23:04:58 -> H0011 ha entrado a la zona exterior: 1
+2025-05-05 23:04:58 -> H0003 entra por el tunel: 1
+2025-05-05 23:04:58 -> H0011 explora la zona exterior: 1
+2025-05-05 23:04:58 -> H0001 ha terminado de recorrer el tunel: 4
+2025-05-05 23:04:58 -> H0001 ha entrado a la zona exterior: 4
+2025-05-05 23:04:58 -> H0001 explora la zona exterior: 4
+2025-05-05 23:04:58 -> H0006 ha terminado de recorrer el tunel: 3
+2025-05-05 23:04:58 -> H0006 ha entrado en el comedor.
+2025-05-05 23:04:58 -> H0006 ha dejado comida en la despensa, ahora hay 6
+2025-05-05 23:04:58 -> H0006 ha salido del comedor.
+2025-05-05 23:04:58 -> H0006 ha entrado en la zona de descanso.
+2025-05-05 23:04:58 -> H0006 empieza a descansar
+2025-05-05 23:04:58 -> H0014 ha entrado en la zona comun.
+2025-05-05 23:04:58 -> H0014 empieza a esperar en la zona comun
+2025-05-05 23:04:59 -> H0003 ha terminado de recorrer el tunel: 1
+2025-05-05 23:04:59 -> H0003 ha entrado a la zona exterior: 1
+2025-05-05 23:04:59 -> H0002 entra por el tunel: 1
+2025-05-05 23:04:59 -> H0003 explora la zona exterior: 1
+2025-05-05 23:04:59 -> H0004 ha terminado de descansar
+2025-05-05 23:04:59 -> H0004 ha salido de la zona de descanso.
+2025-05-05 23:04:59 -> H0004 ha entrado en el comedor.
+2025-05-05 23:04:59 -> H0004 empieza a comer
+2025-05-05 23:04:59 -> H0013 ha terminado de esperar en la zona comun
+2025-05-05 23:04:59 -> H0013 ha salido de la zona comun.
+2025-05-05 23:04:59 -> H0013 espera en la puerta 3
+2025-05-05 23:04:59 -> H0013 pasa en grupo por la puerta 3
+2025-05-05 23:04:59 -> H0009 pasa en grupo por la puerta 3
+2025-05-05 23:04:59 -> H0007 pasa en grupo por la puerta 3
+2025-05-05 23:04:59 -> H0013 entra por el tunel: 3
+2025-05-05 23:05:00 -> H0002 ha terminado de recorrer el tunel: 1
+2025-05-05 23:05:00 -> H0002 ha entrado a la zona exterior: 1
+2025-05-05 23:05:00 -> H0002 explora la zona exterior: 1
+2025-05-05 23:05:00 -> H0010 regresa de la zona exterior: 4
+2025-05-05 23:05:00 -> H0010 sale por el tunel: 4
+2025-05-05 23:05:00 -> H0015 ha entrado en la zona comun.
+2025-05-05 23:05:00 -> H0015 empieza a esperar en la zona comun
+2025-05-05 23:05:00 -> Z0000 se mueve a la zona: 1
+2025-05-05 23:05:00 -> Z0000 va a atacar a: H0002
+2025-05-05 23:05:00 -> H0002 ha sido herido por: Z0000
+2025-05-05 23:05:00 -> H0008 regresa de la zona exterior: 4
+2025-05-05 23:05:00 -> H0014 ha terminado de esperar en la zona comun
+2025-05-05 23:05:00 -> H0014 ha salido de la zona comun.
+2025-05-05 23:05:00 -> H0014 espera en la puerta 2
+2025-05-05 23:05:00 -> H0013 ha terminado de recorrer el tunel: 3
+2025-05-05 23:05:00 -> H0013 ha entrado a la zona exterior: 3
+2025-05-05 23:05:00 -> H0009 entra por el tunel: 3
+2025-05-05 23:05:00 -> H0013 explora la zona exterior: 3
+2025-05-05 23:05:01 -> H0006 ha terminado de descansar
+2025-05-05 23:05:01 -> H0006 ha salido de la zona de descanso.
+2025-05-05 23:05:01 -> H0010 ha terminado de recorrer el tunel: 4
+2025-05-05 23:05:01 -> H0008 sale por el tunel: 4
+2025-05-05 23:05:01 -> H0011 regresa de la zona exterior: 1
+2025-05-05 23:05:01 -> H0011 sale por el tunel: 1
+2025-05-05 23:05:01 -> H0005 ha terminado de descansar
+2025-05-05 23:05:01 -> H0005 ha salido de la zona de descanso.
+2025-05-05 23:05:01 -> H0009 ha terminado de recorrer el tunel: 3
+2025-05-05 23:05:01 -> H0009 ha entrado a la zona exterior: 3
+2025-05-05 23:05:01 -> H0007 entra por el tunel: 3
+2025-05-05 23:05:01 -> H0009 explora la zona exterior: 3
+2025-05-05 23:05:01 -> H0016 ha entrado en la zona comun.
+2025-05-05 23:05:01 -> H0016 empieza a esperar en la zona comun
+2025-05-05 23:05:01 -> H0001 regresa de la zona exterior: 4
+2025-05-05 23:05:01 -> Z0000 se mueve a la zona: 1
+2025-05-05 23:05:01 -> Z0000 va a atacar a: H0003
+2025-05-05 23:05:01 -> H0003 ha sido herido por: Z0000
+2025-05-05 23:05:02 -> H0008 ha terminado de recorrer el tunel: 4
+2025-05-05 23:05:02 -> H0001 sale por el tunel: 4
+2025-05-05 23:05:02 -> H0015 ha terminado de esperar en la zona comun
+2025-05-05 23:05:02 -> H0015 ha salido de la zona comun.
+2025-05-05 23:05:02 -> H0015 espera en la puerta 1
+2025-05-05 23:05:02 -> H0003 regresa de la zona exterior: 1
+2025-05-05 23:05:02 -> H0011 ha terminado de recorrer el tunel: 1
+2025-05-05 23:05:02 -> H0003 sale por el tunel: 1
+2025-05-05 23:05:02 -> H0007 ha terminado de recorrer el tunel: 3
+2025-05-05 23:05:02 -> H0007 ha entrado a la zona exterior: 3
+2025-05-05 23:05:02 -> H0007 explora la zona exterior: 3
+2025-05-05 23:05:02 -> Z0000 se mueve a la zona: 3
+2025-05-05 23:05:02 -> Z0000 va a atacar a: H0009
+2025-05-05 23:05:02 -> H0009 ha sido herido por: Z0000
+2025-05-05 23:05:03 -> H0002 regresa de la zona exterior: 1
+2025-05-05 23:05:03 -> H0017 ha entrado en la zona comun.
+2025-05-05 23:05:03 -> H0017 empieza a esperar en la zona comun
+2025-05-05 23:05:03 -> H0016 ha terminado de esperar en la zona comun
+2025-05-05 23:05:03 -> H0016 ha salido de la zona comun.
+2025-05-05 23:05:03 -> H0016 espera en la puerta 1
+2025-05-05 23:05:03 -> H0016 pasa en grupo por la puerta 1
+2025-05-05 23:05:03 -> H0015 pasa en grupo por la puerta 1
+2025-05-05 23:05:03 -> H0012 pasa en grupo por la puerta 1
+2025-05-05 23:05:03 -> H0001 ha terminado de recorrer el tunel: 4
+2025-05-05 23:05:03 -> H0003 ha terminado de recorrer el tunel: 1
+2025-05-05 23:05:03 -> H0003 ha entrado en la zona de descanso.
+2025-05-05 23:05:03 -> H0002 sale por el tunel: 1
+2025-05-05 23:05:03 -> H0003 empieza a descansar
+2025-05-05 23:05:03 -> H0004 ha terminado de comer
+2025-05-05 23:05:03 -> H0004 ha salido del comedor.
+2025-05-05 23:05:03 -> H0006 ha entrado en el comedor.
+2025-05-05 23:05:03 -> H0006 empieza a comer
+2025-05-05 23:05:04 -> Z0000 se mueve a la zona: 4
+2025-05-05 23:05:04 -> Z0000 va a atacar a: H0001
+2025-05-05 23:05:04 -> H0001 ha sido herido por: Z0000
+2025-05-05 23:05:04 -> H0002 ha terminado de recorrer el tunel: 1
+2025-05-05 23:05:04 -> H0002 ha entrado en la zona de descanso.
+2025-05-05 23:05:04 -> H0016 entra por el tunel: 1
+2025-05-05 23:05:04 -> H0002 empieza a descansar
+2025-05-05 23:05:04 -> H0004 ha entrado en la zona comun.
+2025-05-05 23:05:04 -> H0004 empieza a esperar en la zona comun
+2025-05-05 23:05:04 -> H0018 ha entrado en la zona comun.
+2025-05-05 23:05:04 -> H0018 empieza a esperar en la zona comun
+2025-05-05 23:05:04 -> H0017 ha terminado de esperar en la zona comun
+2025-05-05 23:05:04 -> H0017 ha salido de la zona comun.
+2025-05-05 23:05:04 -> H0017 espera en la puerta 3
+2025-05-05 23:05:05 -> H0013 regresa de la zona exterior: 3
+2025-05-05 23:05:05 -> H0013 sale por el tunel: 3
+2025-05-05 23:05:05 -> Z0000 se mueve a la zona: 4
+2025-05-05 23:05:05 -> Z0000 va a atacar a: H0008
+2025-05-05 23:05:05 -> Z0000 ha matado a: H0008
+2025-05-05 23:05:05 -> Z0008 a aparecido en la zona 4
+2025-05-05 23:05:05 -> Z0008 se mueve a la zona: 3
+2025-05-05 23:05:05 -> Z0008 va a atacar a: H0009
+2025-05-05 23:05:05 -> Z0008 ha matado a: H0009
+2025-05-05 23:05:05 -> Z0009 a aparecido en la zona 3
+2025-05-05 23:05:05 -> Z0009 se mueve a la zona: 3
+2025-05-05 23:05:05 -> Z0009 va a atacar a: H0005
+2025-05-05 23:05:05 -> Z0009 ha matado a: H0005
+2025-05-05 23:05:05 -> Z0005 a aparecido en la zona 3
+2025-05-05 23:05:05 -> Z0005 se mueve a la zona: 2
+2025-05-05 23:05:05 -> H0016 ha terminado de recorrer el tunel: 1
+2025-05-05 23:05:05 -> H0016 ha entrado a la zona exterior: 1
+2025-05-05 23:05:05 -> H0015 entra por el tunel: 1
+2025-05-05 23:05:05 -> H0016 explora la zona exterior: 1
+2025-05-05 23:05:05 -> H0003 ha terminado de descansar
+2025-05-05 23:05:05 -> H0003 ha salido de la zona de descanso.
+2025-05-05 23:05:05 -> H0019 ha entrado en la zona comun.
+2025-05-05 23:05:05 -> H0019 empieza a esperar en la zona comun
+2025-05-05 23:05:06 -> Z0000 se mueve a la zona: 4
+2025-05-05 23:05:06 -> Z0000 va a atacar a: H0001
+2025-05-05 23:05:06 -> Z0000 ha matado a: H0001
+2025-05-05 23:05:06 -> Z0001 a aparecido en la zona 4
+2025-05-05 23:05:06 -> Z0001 se mueve a la zona: 2
+2025-05-05 23:05:06 -> H0018 ha terminado de esperar en la zona comun
+2025-05-05 23:05:06 -> H0018 ha salido de la zona comun.
+2025-05-05 23:05:06 -> H0018 espera en la puerta 4
+2025-05-05 23:05:06 -> H0013 ha terminado de recorrer el tunel: 3
+2025-05-05 23:05:06 -> Z0009 se mueve a la zona: 4
+2025-05-05 23:05:06 -> Z0009 va a atacar a: H0010
+2025-05-05 23:05:06 -> Z0009 ha matado a: H0010
+2025-05-05 23:05:06 -> Z0010 a aparecido en la zona 4
+2025-05-05 23:05:06 -> Z0010 se mueve a la zona: 1
+2025-05-05 23:05:06 -> Z0010 va a atacar a: H0002
+2025-05-05 23:05:06 -> H0002 ha sido herido por: Z0010
+2025-05-05 23:05:06 -> H0015 ha terminado de recorrer el tunel: 1
+2025-05-05 23:05:06 -> H0015 ha entrado a la zona exterior: 1
+2025-05-05 23:05:06 -> H0012 entra por el tunel: 1
+2025-05-05 23:05:06 -> H0015 explora la zona exterior: 1
+2025-05-05 23:05:06 -> H0004 ha terminado de esperar en la zona comun
+2025-05-05 23:05:06 -> H0004 ha salido de la zona comun.
+2025-05-05 23:05:06 -> H0004 espera en la puerta 1
+2025-05-05 23:05:06 -> H0020 ha entrado en la zona comun.
+2025-05-05 23:05:06 -> Z0008 se mueve a la zona: 3
+2025-05-05 23:05:06 -> H0020 empieza a esperar en la zona comun
+2025-05-05 23:05:06 -> Z0008 va a atacar a: H0007
+2025-05-05 23:05:06 -> Z0008 ha matado a: H0007
+2025-05-05 23:05:06 -> Z0007 a aparecido en la zona 3
+2025-05-05 23:05:06 -> Z0007 se mueve a la zona: 3
+2025-05-05 23:05:06 -> Z0007 va a atacar a: H0009
+2025-05-05 23:05:06 -> H0009 ha sido herido por: Z0007
+2025-05-05 23:05:06 -> Z0000 se mueve a la zona: 2
+2025-05-05 23:05:07 -> H0002 ha terminado de descansar
+2025-05-05 23:05:07 -> H0002 ha salido de la zona de descanso.
+2025-05-05 23:05:07 -> Z0009 se mueve a la zona: 4
+2025-05-05 23:05:07 -> H0012 ha terminado de recorrer el tunel: 1
+2025-05-05 23:05:07 -> H0012 ha entrado a la zona exterior: 1
+2025-05-05 23:05:07 -> H0012 explora la zona exterior: 1
+2025-05-05 23:05:07 -> Z0008 se mueve a la zona: 3
+2025-05-05 23:05:07 -> Z0008 va a atacar a: H0006
+2025-05-05 23:05:07 -> H0006 ha sido herido por: Z0008
+2025-05-05 23:05:07 -> Z0010 se mueve a la zona: 4
+2025-05-05 23:05:07 -> H0019 ha terminado de esperar en la zona comun
+2025-05-05 23:05:07 -> H0019 ha salido de la zona comun.
+2025-05-05 23:05:07 -> H0019 espera en la puerta 1
+2025-05-05 23:05:08 -> Z0005 se mueve a la zona: 4
+2025-05-05 23:05:08 -> H0020 ha terminado de esperar en la zona comun
+2025-05-05 23:05:08 -> H0020 ha salido de la zona comun.
+2025-05-05 23:05:08 -> H0020 espera en la puerta 3
+2025-05-05 23:05:08 -> Z0007 se mueve a la zona: 2
+2025-05-05 23:05:08 -> H0021 ha entrado en la zona comun.
+2025-05-05 23:05:08 -> H0021 empieza a esperar en la zona comun
+2025-05-05 23:05:08 -> H0006 ha terminado de comer
+2025-05-05 23:05:08 -> H0006 ha salido del comedor.
+2025-05-05 23:05:08 -> H0006 ha entrado en la zona de descanso.
+2025-05-05 23:05:08 -> H0010 ha entrado en el comedor.
+2025-05-05 23:05:08 -> H0006 empieza a curarse
+2025-05-05 23:05:08 -> H0010 ha dejado comida en la despensa, ahora hay 6
+2025-05-05 23:05:08 -> H0010 ha salido del comedor.
+2025-05-05 23:05:08 -> Z0001 se mueve a la zona: 1
+2025-05-05 23:05:08 -> H0005 ha entrado en el comedor.
+2025-05-05 23:05:08 -> H0010 ha entrado en la zona de descanso.
+2025-05-05 23:05:08 -> H0005 empieza a comer
+2025-05-05 23:05:08 -> Z0001 va a atacar a: H0003
+2025-05-05 23:05:08 -> H0010 empieza a descansar
+2025-05-05 23:05:08 -> Z0001 ha matado a: H0003
+2025-05-05 23:05:08 -> Z0003 a aparecido en la zona 1
+2025-05-05 23:05:08 -> Z0003 se mueve a la zona: 2
+2025-05-05 23:05:09 -> Z0008 se mueve a la zona: 4
+2025-05-05 23:05:09 -> H0022 ha entrado en la zona comun.
+2025-05-05 23:05:09 -> H0022 empieza a esperar en la zona comun
+2025-05-05 23:05:09 -> Z0001 se mueve a la zona: 1
+2025-05-05 23:05:09 -> Z0001 va a atacar a: H0002
+2025-05-05 23:05:09 -> H0002 ha sido herido por: Z0001
+2025-05-05 23:05:09 -> H0021 ha terminado de esperar en la zona comun
+2025-05-05 23:05:09 -> H0021 ha salido de la zona comun.
+2025-05-05 23:05:09 -> H0021 espera en la puerta 4
+2025-05-05 23:05:09 -> Z0000 se mueve a la zona: 2
+2025-05-05 23:05:09 -> H0015 regresa de la zona exterior: 1
+2025-05-05 23:05:09 -> H0015 sale por el tunel: 1
+2025-05-05 23:05:09 -> H0016 regresa de la zona exterior: 1
+2025-05-05 23:05:09 -> Z0009 se mueve a la zona: 2
+2025-05-05 23:05:10 -> Z0005 se mueve a la zona: 4
+2025-05-05 23:05:10 -> Z0001 se mueve a la zona: 4
+2025-05-05 23:05:10 -> Z0010 se mueve a la zona: 2
+2025-05-05 23:05:10 -> H0023 ha entrado en la zona comun.
+2025-05-05 23:05:10 -> H0023 empieza a esperar en la zona comun
+2025-05-05 23:05:10 -> H0015 ha terminado de recorrer el tunel: 1
+2025-05-05 23:05:10 -> H0016 sale por el tunel: 1
+2025-05-05 23:05:10 -> H0022 ha terminado de esperar en la zona comun
+2025-05-05 23:05:10 -> H0022 ha salido de la zona comun.
+2025-05-05 23:05:10 -> H0022 espera en la puerta 1
+2025-05-05 23:05:10 -> H0022 pasa en grupo por la puerta 1
+2025-05-05 23:05:10 -> H0019 pasa en grupo por la puerta 1
+2025-05-05 23:05:10 -> H0004 pasa en grupo por la puerta 1
+2025-05-05 23:05:10 -> H0010 ha terminado de descansar
+2025-05-05 23:05:10 -> H0010 ha salido de la zona de descanso.
+2025-05-05 23:05:11 -> Z0007 se mueve a la zona: 3
+2025-05-05 23:05:11 -> Z0007 va a atacar a: H0004
+2025-05-05 23:05:11 -> H0004 ha sido herido por: Z0007
+2025-05-05 23:05:11 -> Z0003 se mueve a la zona: 2
+2025-05-05 23:05:11 -> Z0000 se mueve a la zona: 3
+2025-05-05 23:05:11 -> Z0000 va a atacar a: H0006
+2025-05-05 23:05:11 -> H0006 ha sido herido por: Z0000
+2025-05-05 23:05:11 -> H0016 ha terminado de recorrer el tunel: 1
+2025-05-05 23:05:11 -> H0022 entra por el tunel: 1
+2025-05-05 23:05:11 -> Z0008 se mueve a la zona: 3
+2025-05-05 23:05:11 -> Z0008 va a atacar a: H0013
+2025-05-05 23:05:11 -> Z0008 ha matado a: H0013
+2025-05-05 23:05:11 -> Z0013 a aparecido en la zona 3
+2025-05-05 23:05:11 -> Z0013 se mueve a la zona: 4
+2025-05-05 23:05:11 -> Z0007 se mueve a la zona: 3
+2025-05-05 23:05:11 -> Z0007 va a atacar a: H0004
+2025-05-05 23:05:11 -> H0004 ha sido herido por: Z0007
+2025-05-05 23:05:11 -> H0012 regresa de la zona exterior: 1
