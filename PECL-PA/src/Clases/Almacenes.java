@@ -79,7 +79,7 @@ public class Almacenes {
         entrar(listaAldeanos, aldeano, "Almacenes");
         log.evento(aldeano.getID() + " ha entrado al almacen: " + nombre);
         try {
-            int cantidad = aldeano.getRecurso();
+            int cantidad = aldeano.getRecursoCont();
             switch(num){           
                 case 1:
                     granero += cantidad;

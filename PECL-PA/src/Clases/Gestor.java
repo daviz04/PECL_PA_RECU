@@ -12,7 +12,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Gestor {
-    private final CyclicBarrier barrera1, barrera2, barrera3, barrera4;
+    private final CyclicBarrier barrera1, barrera2, barrera3;
     private final AreaRecursos granja, bosque, mina;
     private List<Aldeanos> listaPuerta1 = Collections.synchronizedList(new ArrayList<>());
     private List<Aldeanos> listaPuerta2 = Collections.synchronizedList(new ArrayList<>());
@@ -22,22 +22,21 @@ public class Gestor {
     private Almacenes granero, aserradero, tesoreria;
     private CampamentoBarbaro campBarbaro;
     ExecutorService ejecutor = Executors.newCachedThreadPool();
-    
-    private Controlador control;
+    private Controlador controlAreaRecursos;
     
     public Gestor(Registro log, ExecutorService ejecutor, 
-            Controlador controlTuneles, Controlador controlRefugio, Controlador controlExterior, CampamentoBarbaro campBarbaro){
+            Controlador controlAreaRecursos, Controlador controlRefugio, Controlador controlExterior, CampamentoBarbaro campBarbaro){
         this.log = log;
         this.ejecutor = ejecutor;
-        this.control = controlTuneles;
+        this.controlAreaRecursos = controlAreaRecursos;
         //Almacenes
-        this.granero = new Almacenes(1, log, control, "granero");
-        this.aserradero = new Almacenes(1, log, control, "aserradero");
-        this.tesoreria = new Almacenes(1, log, control, "tesoreria");
+        this.granero = new Almacenes(1, log, this.controlAreaRecursos, "granero");
+        this.aserradero = new Almacenes(1, log, this.controlAreaRecursos, "aserradero");
+        this.tesoreria = new Almacenes(1, log, this.controlAreaRecursos, "tesoreria");
         //Campamento barbaro
         this.campBarbaro = campBarbaro;
         //Inicialización del refugio
-        this.Ref = new CentroUrbano(log, control, granero, aserradero, tesoreria);
+        this.Ref = new CentroUrbano(log, this.controlAreaRecursos, granero, aserradero, tesoreria);
         //las areas de recursos
         this.granja = new AreaRecursos(log, ejecutor, 1, controlExterior);
         this.bosque = new AreaRecursos(log, ejecutor, 2, controlExterior);
@@ -46,7 +45,6 @@ public class Gestor {
         barrera1 = new CyclicBarrier(3);
         barrera2 = new CyclicBarrier(3);
         barrera3 = new CyclicBarrier(3);
-        barrera4 = new CyclicBarrier(3);
     }
     
     //Método para crear los aldeanos
@@ -84,30 +82,31 @@ public class Gestor {
     public void accederAreaRecursos(Aldeanos aldeano){
         try {
             //Se escoge un tunel aleatorio y entra por la puerta que corresponde al tunel que corresponde
-            int tunel = (int)(Math.random() * 3) + 1;           
-            switch(tunel){
-                case 1 -> procesoAreaRecursos(aldeano, barrera1, "Puerta1", listaPuerta1, granja);
-                case 2 -> procesoAreaRecursos(aldeano, barrera2, "Puerta2", listaPuerta2, bosque);
-                case 3 -> procesoAreaRecursos(aldeano, barrera3, "Puerta3", listaPuerta3, mina);
+            int area = aldeano.getEleccionRecurso();
+            switch(area){
+                case 1 -> procesoAreaRecursos(aldeano, "Granero", listaPuerta1, granja);
+                case 2 -> procesoAreaRecursos(aldeano, "Aserradero", listaPuerta2, bosque);
+                case 3 -> procesoAreaRecursos(aldeano, "Tesoreria", listaPuerta3, mina);
             }
         } catch (InterruptedException | BrokenBarrierException e) {
             System.out.println("Ha saltado una interrupcion en la zona de puertas");}
     }
     
     //Metodo que cumple las funciones para acceder y salir del tunel
-    private void procesoAreaRecursos(Aldeanos aldeano, CyclicBarrier B, String puertaID, 
-            List<Aldeanos> L, AreaRecursos Z) throws InterruptedException, BrokenBarrierException {
-        //Regeneramos las barreras si es necesario
-        if(B.isBroken()) {B.reset();}
-        //Espera en la barrera a formar grupo
-        log.evento((aldeano.getID() + " espera en la puerta "));
-        esperaPuerta(aldeano, L, puertaID);
-        B.await();
-        salirPuerta(aldeano, L, puertaID);
-        //Atraviesa el tunel una vez se han reunido 3 personas
-        log.evento((aldeano.getID() + " pasa en grupo por la puerta "));
+    private void procesoAreaRecursos(Aldeanos aldeano, String puertaID, List<Aldeanos> L, 
+        AreaRecursos areaRecurso) throws InterruptedException, BrokenBarrierException {
+
+        //primera condicion: Que haya hueco 2)Segunda condicion: que no este bajo ataque el area
+        if(areaRecurso.getSemaforo() && areaRecurso.getEntrada()){
+     
+        log.evento((aldeano.getID() + " pasa al area de recursos: " + areaRecurso.getZonaNombre()));
         //Sale al exterior
-        Z.entrarZonaRecursos(aldeano);
+        areaRecurso.entrarZonaRecursos(aldeano);
+        }else{
+        log.evento((aldeano.getID() + " espera a que pueda pasar "));
+        esperaPuerta(aldeano, L, puertaID);
+        salirPuerta(aldeano, L, puertaID);
+        }
     }
     
     
@@ -129,11 +128,11 @@ public class Gestor {
     //Metodos de las listas de las barreras/puertas y su paso a interfaz
     private void esperaPuerta(Aldeanos humano, List<Aldeanos> L, String puertaID){
         L.add(humano);
-        control.add(puertaID, humano.getID());
+        controlAreaRecursos.add(puertaID, humano.getID());
     }
     private void salirPuerta(Aldeanos humano, List<Aldeanos> L, String puertaID){
         L.remove(humano);
-        control.remove(puertaID, humano.getID());
+        controlAreaRecursos.remove(puertaID, humano.getID());
     }
     
     public CentroUrbano getRefugio(){

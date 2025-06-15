@@ -85,18 +85,15 @@ public class CentroUrbano {
         log.evento(aldeano.getID() + " ha entrado en la Plaza Central.");
         //Espera en la zona de descanso entre 2 y 4s (4-2=2)
         tiempoEspera(aldeano, "planificar", 1000, 2001);
+        
+        //Con este numero sabremos a que area ira el aldeano
         int recurso = (int) (Math.random()* 3) + 1;
-        salir(plazaCentral, aldeano, "PlazaCentral");
-        switch(recurso){
-            case 1: 
-                aldeano.setGranero(true);
-                
-            case 2:
-                aldeano.setAserradero(true);
-                
-            case 3:
-                aldeano.setTesoreria(true);
-        }
+        
+        //El aldeano sabe su eleccion y la guarda
+        aldeano.setEleccionRecurso(recurso);
+        
+        salir(plazaCentral, aldeano, "PlazaCentral");  
+        
         //Hacer que elija la zona de recursos a la que irá
         log.evento(aldeano.getID() + " ha salido de la Plaza Central.");
     }

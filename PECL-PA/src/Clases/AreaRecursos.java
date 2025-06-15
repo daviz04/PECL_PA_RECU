@@ -7,6 +7,7 @@ import java.util.List;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -14,24 +15,38 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 
 public class AreaRecursos {
+    //Numero asignado a cada zona: 1)Granero 2)Aserradero 3)Tesorería
+    private final int zona; 
+    private String zonaNombre = "";
     
-    private final int zona; //Numero asignado a cada zona
-    
+    //Listas de aldeanos, barbaros y guerreros
     private List<Aldeanos> listaAldeanos = Collections.synchronizedList(new ArrayList<>());
     private List<Barbaros> listaBarbaros = Collections.synchronizedList(new ArrayList<>());
     
+    //Semaforos y Locks
+    private Semaphore capacidad = new Semaphore(4, true); 
     private Lock bajoAtaque = new ReentrantLock();
     private Condition finAtaque = bajoAtaque.newCondition();
+    private boolean entrada;
     
+    //Interfaz grafica
     private Registro log;
     ExecutorService ejecutor = Executors.newCachedThreadPool();
-    private Controlador controlExterior;
+    private Controlador controlAreaRecursos;
     
     AreaRecursos(Registro log, ExecutorService ej, int zona, Controlador controlador){
         this.log = log;
         this.ejecutor = ej;
         this.zona = zona;
-        this.controlExterior = controlador;
+        this.controlAreaRecursos = controlador;
+        switch(zona){
+            case 1: 
+                zonaNombre = "Granero";
+            case 2:
+                zonaNombre = "Aserradero";
+            case 3:
+                zonaNombre = "Tesorería";
+        }
     }
     
     //Método para salir del tunel y recolectarRecurso el exterior, para al final volver
@@ -44,7 +59,7 @@ public class AreaRecursos {
             //Durante este tiempo el aldeano busca comida pero es susceptible a ataques zombi
             Thread.sleep(t);
             int recurso = (int)(Math.random() * (11)) + 10;
-            aldeano.agregarRecurso(recurso);
+            aldeano.agregarRecursos(recurso);
             //Si termina la busqueda encuentra comida
         } catch (InterruptedException e) {
             //Si es interrumpido es por un ataque barbaro
@@ -56,7 +71,7 @@ public class AreaRecursos {
                 Thread.sleep(t2);
                 aldeano.quitarRecursos();
             } catch(InterruptedException e2){
-                System.out.println("Interrupcion en la espera del humano tras el ataque");
+                System.out.println("Interrupcion en la espera del aldeano tras el ataque");
             } finally {
                 bajoAtaque.unlock();
             }
@@ -67,6 +82,7 @@ public class AreaRecursos {
     public void ataqueBarbaro(Barbaros barbaro) {
         //Bloqueamos por el ataque
         bajoAtaque.lock();
+        entrada = false;
         //Variable para determinar a que humano atacara el barbaro
         Aldeanos humanoAtacado = getHumanoAleatorio();
         log.evento(barbaro.getID() + " va a atacar a: " + humanoAtacado.getID());
@@ -76,8 +92,7 @@ public class AreaRecursos {
             //Determina el resultado del ataque
             int prob = (int)(Math.random() * 3) + 1; //Variable aleatoria para determinar si mata o hiere
             if(prob == 3){ 
-                //Mata al humano
-                humanoAtacado.setMuerto();
+                //Mata al humano 
                 quitarHumanoLista(humanoAtacado); //Eliminacion de la lista de humanos
                 
                 //Registramos la muerte del humano por el ataque barbaro
@@ -93,6 +108,7 @@ public class AreaRecursos {
             finAtaque.signalAll();
         } finally { 
             //Termina el ataque
+            entrada = true;
             bajoAtaque.unlock();
             try { //El barbaro espera el tiempo del ataque
                 int t = (int)(Math.random() * (1500 - 500 + 1)) + 500; 
@@ -107,30 +123,30 @@ public class AreaRecursos {
     public synchronized void entrarZonaRecursos(Aldeanos aldeano){        
         aldeano.setActual(this);
         listaAldeanos.add(aldeano);
-        controlExterior.add("AldeanosA" + getZona(), aldeano.getID());
-        log.evento((aldeano.getID() + " ha entrado a la zona de recursos: " + zona));
+        controlAreaRecursos.add("AldeanosA" + getZona(), aldeano.getID());
+        log.evento((aldeano.getID() + " ha entrado a la zona de recursos: " + zonaNombre));
     }
     
     public synchronized void saleZonaRecursos(Aldeanos aldeano){
         listaAldeanos.remove(aldeano);
-        controlExterior.remove("AldeanoA" + getZona(), aldeano.getID());
-        log.evento((aldeano.getID() + " regresa de la zona de recursos: " + zona));
+        controlAreaRecursos.remove("AldeanoA" + getZona(), aldeano.getID());
+        log.evento((aldeano.getID() + " regresa de la zona de recursos: " + zonaNombre));
     }
     
     //Añadir y quitar zombi de la lista
     public synchronized void addZombi(Barbaros zombie){
         listaBarbaros.add(zombie);
-        controlExterior.add("ZombisE" + getZona(), zombie.getID());
+        controlAreaRecursos.add("ZombisE" + getZona(), zombie.getID());
     }
     public synchronized void removeZombi(Barbaros zombie){
         listaBarbaros.remove(zombie);
-        controlExterior.remove("ZombisE" + getZona(), zombie.getID());
+        controlAreaRecursos.remove("ZombisE" + getZona(), zombie.getID());
     }
     
     //Quita el humano que muere
     public synchronized void quitarHumanoLista(Aldeanos humano){ //Eliminacion de humanos de la lista
         listaAldeanos.remove(humano);
-        controlExterior.remove("HumanosE" + getZona(), humano.getID());
+        controlAreaRecursos.remove("HumanosE" + getZona(), humano.getID());
     }
     
     //Devuelve si hay o no humanos en la zona
@@ -143,6 +159,13 @@ public class AreaRecursos {
         int humanoListIndice = (int)(Math.random() * getNumHumanos());
         return listaAldeanos.get(humanoListIndice);
     }
+    
+    //Método par aver si hay espacio en el area de recursos
+    public synchronized boolean getSemaforo(){
+        int permisos = capacidad.availablePermits();
+        return permisos > 0;
+    }
+   
     
     //Gets
     public List<Aldeanos> getListaAldeanos() {
@@ -159,6 +182,12 @@ public class AreaRecursos {
     }
     public int getZona() {
         return zona;
+    }
+    public String getZonaNombre(){
+        return zonaNombre;
+    }
+    public boolean getEntrada(){
+        return entrada;
     }
     
     public List<Barbaros> obtenerTop3Zombis(List<Barbaros> lista) {

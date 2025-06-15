@@ -7,12 +7,10 @@ import java.util.logging.Logger;
 public class Aldeanos extends Thread {
     private int nid; //numero del id
     private String id;
-    private int recurso = 0;
+    private int recursoCont = 0;
     private boolean bajoAtaque;
-    private boolean granero = false;
-    private boolean aserradero = false;
-    private boolean tesoreria = false;
 
+    private int eleccionRecurso;
     private Almacenes A1, A2, A3;
     private Gestor gestor;
     private CentroUrbano centroUrbano;
@@ -46,68 +44,54 @@ public class Aldeanos extends Thread {
     public void setActual(AreaRecursos zona){
         this.actual = zona;
     }
-    public int getRecurso(){
-        return recurso;
+    public int getEleccionRecurso(){
+        return eleccionRecurso;
     }
-    public void agregarRecurso(int num){
-        this.recurso += num;
+    public void setEleccionRecurso(int eleccionRecurso){
+        this.eleccionRecurso = eleccionRecurso;
+    }
+    public int getRecursoCont(){
+        return recursoCont;
+    }
+    public void agregarRecursos(int num){
+        this.recursoCont += num;
     }
     public void quitarRecursos(){
-        this.recurso = 0;
+        this.recursoCont = 0;
     }
-    
-    public void setGranero(boolean bool){
-        this.granero = bool;
-    }
-    public void setAserradero(boolean bool){
-        this.aserradero = bool;
-    }
-    public void setTesoreria(boolean bool){
-        this.tesoreria = bool;
-    }
-    
-    public void limpiarAlmacen(){
-        granero = false;
-        aserradero = false;
-        tesoreria = false;
-    }
-        
     //Ejecucion del hilo
     public void run(){
         centroUrbano.esperaComun(this);
         while(true){
             centroUrbano.planificarTrabajo(this);
-            //Selecciona un tunel y lo atraviesa en grupo de 3
+
             gestor.accederAreaRecursos(this);
             //Explora el exterior
             actual.recolectarRecurso(this);
             setActual(null); //Deja de estar en el exterior
             //Si el hilo vuelve bajoAtaque no habra conseguido comida
             if(!this.bajoAtaque){
-                if(granero){
+               switch(eleccionRecurso){
+                   case 1:
                     try {
-                        A1.almacenar(this, "almacena grano");
-                        limpiarAlmacen();
+                        A1.almacenar(this, "almacena grano");   
                     } catch (InterruptedException ex) {
                             Logger.getLogger(Aldeanos.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }else if(aserradero){
+                   case 2:
                     try {
-                        A2.almacenar(this, "almacena madera");
-                        limpiarAlmacen();
+                        A2.almacenar(this, "almacena madera");             
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Aldeanos.class.getName()).log(Level.SEVERE, null, ex);
                     }          
-                }else if(tesoreria){
+                   case 3:
                     try {
                         A3.almacenar(this, "almacena oro");
-                        limpiarAlmacen();
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Aldeanos.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }  
-            }
-               
+            }       
                 if(this.bajoAtaque){
                     centroUrbano.areaRecuperacion(this);
                 }
